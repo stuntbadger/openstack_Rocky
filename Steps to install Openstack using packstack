@@ -1,0 +1,25 @@
+Steps for Installing Open Stack PackStack on Centos
+
+Spec 8 Core 32GB RAM 100GB HDD 
+
+sudo setenforce 0
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+sudo systemctl disable NetworkManager
+sudo systemctl stop NetworkManager
+
+yum autoremove epel-release  
+yum autoremove openstack-packstack  
+yum clean all
+
+yum search centos-release-openstack
+
+yum install -y centos-release-openstack-bobcat.noarch
+yum update -y
+dnf config-manager --enable crb # fixes python3.9dist(pygments) depandancy
+yum install -y openstack-packstack
+packstack --allinone
+
+Find the password for admin account:
+
+cat keystonerc_admin
